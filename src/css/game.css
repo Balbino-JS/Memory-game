@@ -10,6 +10,7 @@
     aspect-ratio: 3/5;/*define a proporção*/
     background-color: #333;
     border-radius: 5px;
+    margin: 2rem;
     position: relative;
     transition: all 400ms ease;
     transform-style: preserve-3d;
@@ -25,14 +26,13 @@
     width: 100%;   
 }
 .front {
-   background-image: url(../img/alligator.jpg);
    transform: rotateY(180deg);
 }
 .back {
     background-image: url(../img/arca.jpg);
     backface-visibility: hidden;
 }
-.card:hover {
+.reveal-card {
     transform: rotateY(180deg);
-    
 }
+
