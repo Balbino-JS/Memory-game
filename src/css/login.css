@@ -6,6 +6,7 @@
     font-family: "Press Start 2P", system-ui;
     list-style: none;
     margin: 0;
+    
     padding: 0;
 }
 body {
@@ -13,27 +14,23 @@ body {
 }
 .login-form {
     align-items: center;
-    backdrop-filter: blur(1rem);
-    border: 2rem solid rgb(255, 255, 255, 255, 0.3);
-    border-radius: 2rem;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 95dvh;
     justify-content: center;
-    
 }
 .login-header {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 .login-header img {
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 200px;
+    width: 300px;
 }
 .login-header img:hover {
     transform: scale(1.3);
@@ -42,26 +39,27 @@ body {
 .login-header h1 {
     color: #333;
     font-size: 1.5rem;
-    margin: 2rem;
+    margin: 2rem 0;
 }
 .login-input {
     border: 2px solid #333;
     border-radius: .8rem;
     color: #333;
     font-size: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     max-width: 30rem;
     outline: none;
     padding: 15px;
     width: 100%;
 }
 .login-button {
-    background: linear-gradient(45deg, #0800ff, #4000ff, #5c33ff, #b6b1ff, #3c00ff);
+    background: linear-gradient(45deg, #0800ff, #9f7fff, #5c33ff, #b6b1ff, #3c00ff);
     border: none;
     border-radius: .8rem;
     color: #1d1d1d;
     cursor: pointer;
     font-weight: bold;
+    margin-top: 0.5rem;
     padding: 10px 20px;
     width: auto;
 }
@@ -69,4 +67,52 @@ body {
     background: linear-gradient(45deg, #c0bfda, #d6cbf7, #d0d0d1, #c0bcf8, #ccc7df);
     color: #aaa;
     cursor: auto;
+}
+.orientation-warning {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #000;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+/* Quando estiver em paisagem, mostra aviso e esconde o formulário */
+@media (orientation: landscape) and (max-width: 630px) {
+    .orientation-warning {
+        display: flex;
+    }
+
+    .login-form {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 50rem){
+    .login-form {
+        margin: 1rem;
+        padding: 1.5rem;
+       
+    }
+    .login-header img {
+        width: 5rem;
+    }
+    .login-header {
+        width: 3rem;
+    }
+    .login-input,
+    .login-button {
+        max-width: 100%;
+    }
+    .login-header h1 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
 }
