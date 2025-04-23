@@ -1,14 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-* {
-    border: none;
-    box-sizing: border-box;
-    font-family: "Press Start 2P", system-ui;
-    list-style: none;
-    margin: 0;
-    
-    padding: 0;
-}
 body {
     background: linear-gradient(45deg, #cccccd, #c1bfc7, #6b6b6c, #c8c7d3, #797684);
 }
