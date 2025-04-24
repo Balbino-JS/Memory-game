@@ -1,20 +1,49 @@
+body {
+    background-color: azure;
+    background-image: url(../img/arca.jpg);
+    overflow: hidden;
+}
+main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px 20px 50px;
+    width: 100%;
+}
+header {
+    align-items: center;
+    background-color: rgb(255, 255, 255, 0.5);
+    color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 30px;
+    max-width: 800px;
+    padding: 1rem;
+    width: 100%;
+}
 .grid {
     display: grid;
     gap: 15px;
-    grid-template-columns: repeat(5, 1fr);/*divide a coluna em fração*/
+    grid-template-columns: repeat(5, 1fr);
+    margin: 20px auto;
     max-width: 800px;
-    perspective: 100rem;
+    overflow: hidden;
     width: 100%;
 }
+h1 {
+    font-size: 24px;
+    justify-content: center;
+    margin-top: 20px;
+    text-align: center;
+}
 .card {
-    aspect-ratio: 3/5;/*define a proporção*/
-    background-color: #333;
-    border-radius: 5px;
-    margin: 2rem;
+    aspect-ratio: 3/4;
     position: relative;
     transition: all 400ms ease;
     transform-style: preserve-3d;
-    width: 100%;
+    width: 100px;
 }
 .face {
     background-position: center;
@@ -35,4 +64,10 @@
 .reveal-card {
     transform: rotateY(180deg);
 }
+.disabled-card {
+    filter: saturate(0);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 

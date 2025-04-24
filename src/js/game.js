@@ -1,30 +1,21 @@
 const grid = document.querySelector('.grid');
+const spanPlayer = document.querySelector('.player');
+const timer = document.querySelector('.timer');
 
 const characters = [
-    'alligator',
-    'bear',
     'bull',
     'cow',
     'elephant',
-    'emu',
     'fox',
-    'frog',
     'giraffe',
-    'goat',
     'gorilla',
-    'hippo',
     'lion',
-    'mole',
     'monkey',
-    'moose',
     'mouse',
     'ounce',
-    'pork',
-    'rabbit',
-    'sheep',
-    'snake',
     'tiger',
     'tortoise',
+    'snake',
     'zebra'
 ];
 
@@ -38,13 +29,45 @@ const createElement = (tag, className) => {
 let firstCard ='';
 let secondCard = '';
 
+const checkEndGame = () =>{
+    const disabledCards = document.querySelectorAll('.disabled-card');
+
+    if (disabledCards.length === 40) {
+        clearInterval(this.loop)
+        alert(`Parabéns, ${spanPlayer.innerHTML}! Seu tempo foi ${timer.innerHTML}`);
+    }
+}
 const checkCards = () => {
 
-}
+    const firstCharacter = firstCard.getAttribute('data-character');
+    const secondCharacter = secondCard.getAttribute('data-character');
+
+    if (firstCharacter === secondCharacter) {
+
+        firstCard.firstChild.classList.add('disabled-card');
+        secondCard.firstChild.classList.add('disabled-card');
+
+        firstCard = '';
+        secondCard = '';
+
+        checkEndGame();
+
+    } else {
+        setTimeout(() => {
+
+            firstCard.classList.remove('reveal-card');
+            secondCard.classList.remove('reveal-card');
+
+            firstCard = '';
+            secondCard = '';
+
+        }, 500);
+    }
+};
 
 const revealCard = ({target}) => {
 
-    if (!target.parentNode.contains('reveal-card')){
+    if (!target.classList.contains('face')){
         return;
     }
 
@@ -59,7 +82,8 @@ const revealCard = ({target}) => {
     }
 
    
-}
+};
+
 const createCard = (character) => {
     const card = createElement('div', 'card'); 
     const front = createElement('div','face front');
@@ -89,6 +113,25 @@ const loadGame = () => {
     });
 };
 
-loadGame();
+const startTimer = () => {
+
+    this.loop = setInterval(() => {
+
+        const currentTime = +timer.innerHTML;
+        timer.innerHTML = currentTime + 1;
+
+    }, 1000);
+
+}
+
+window.onload = () => {
+    
+    const playerName = localStorage.getItem('player');
+
+    spanPlayer.innerHTML = playerName;
+    startTimer();
+    loadGame();
+}
+
 
 
