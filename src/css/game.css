@@ -1,73 +1,171 @@
 body {
-    background-color: azure;
-    background-image: url(../img/arca.jpg);
-    overflow: hidden;
+  min-height: 100vh;
+  margin: 0; /* Garante que não haja margens fantasmas */
+  overflow: hidden; /* Remove barras de rolagem globalmente */
+
+  background:
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+    url('../img/arca.jpg');
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
+
 main {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px 20px 50px;
-    width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh; /* Força o main a ter exatamente a altura da tela */
+  box-sizing: border-box;
+  padding: 10px 20px calc(50px + 10px); /* Padding inferior considerando a altura do footer */
+  width: 100%;
 }
+
 header {
-    align-items: center;
-    background-color: rgb(255, 255, 255, 0.5);
-    color: aliceblue;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 0 30px;
-    max-width: 800px;
-    padding: 1rem;
-    width: 100%;
+  align-items: center;
+  background-color: rgba(43, 8, 198, 0.5);
+  color: aliceblue;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 15px; /* Reduzido para dar mais espaço ao grid */
+  max-width: 800px;
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
-.grid {
-    display: grid;
-    gap: 15px;
-    grid-template-columns: repeat(5, 1fr);
-    margin: 20px auto;
-    max-width: 800px;
-    overflow: hidden;
-    width: 100%;
-}
+
 h1 {
-    font-size: 24px;
-    justify-content: center;
-    margin-top: 20px;
-    text-align: center;
+  font-size: 22px;
+  margin: 0;
+  text-align: center;
 }
+
+.grid {
+  display: grid;
+  gap: clamp(4px, 1vw, 10px);
+  /* 7 colunas no PC distribui perfeitamente os 28 cards (7x4 = 28) */
+  grid-template-columns: repeat(7, 1fr); 
+  justify-items: center;
+  align-content: center;
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+  flex-grow: 1; /* Faz o grid ocupar o espaço disponível verticalmente */
+  max-height: calc(100vh - 180px); /* Teto máximo para não empurrar o footer */
+}
+
 .card {
-    aspect-ratio: 3/4;
-    position: relative;
-    transition: all 400ms ease;
-    transform-style: preserve-3d;
-    width: 100px;
+  aspect-ratio: 3/4;
+  position: relative;
+  width: 100%;
+  /* Usamos vmin para que a carta diminua se a tela for muito baixa (responsividade vertical) */
+  max-width: clamp(45px, 8vmin, 85px); 
+  transition: all 400ms ease;
+  transform-style: preserve-3d;
 }
+
 .face {
-    background-position: center;
-    background-size: cover;
-    border: 2px solid #3333;
-    border-radius: 5px;
-    height: 100%;
-    position: absolute;
-    width: 100%;   
+  background-position: center;
+  background-size: cover;
+  border: 2px solid #3333;
+  border-radius: 5px;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden; /* Movido para cá para aplicar a ambas as faces corretamente */
 }
+
 .front {
-   transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
+
 .back {
-    background-image: url(../img/arca.jpg);
-    backface-visibility: hidden;
+  background-image: url(../img/arca.jpg);
 }
+
 .reveal-card {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
+
 .disabled-card {
-    filter: saturate(0);
-    opacity: 0.5;
-    pointer-events: none;
+  filter: saturate(0);
+  opacity: 0.5;
+  pointer-events: none;
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  box-sizing: border-box;
+  z-index: 10;
+}
 
+/* ========================= */
+/* TABLET (Telas até 868px)  */
+/* ========================= */
+@media screen and (max-width: 868px) {
+  header {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(7, 1fr); /* Mantém 7x4, mas reduz o tamanho máximo */
+    gap: 8px;
+  }
+
+  .card {
+    max-width: clamp(40px, 10vmin, 65px);
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+}
+
+/* ========================= */
+/* MOBILE (Telas até 480px)  */
+/* ========================= */
+@media screen and (max-width: 480px) {
+  main {
+    padding: 10px 10px calc(50px + 10px);
+    justify-content: center; /* Centraliza o conteúdo verticalmente também no mobile */
+  }
+
+  header {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+
+  .grid {
+    /* No mobile, invertemos para 4 colunas e 7 linhas (4x7 = 28) */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 6px;
+    max-width: 100%;
+    max-height: calc(100vh - 160px);
+  }
+
+  .card {
+    /* Controla o tamanho estrito baseado na menor dimensão da tela do celular */
+    max-width: clamp(35px, 11vmin, 52px); 
+  }
+
+  h1 {
+    font-size: 16px;
+  }
+}
